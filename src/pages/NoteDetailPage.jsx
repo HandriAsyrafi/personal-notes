@@ -19,7 +19,7 @@ export default function NoteDetailPage({ notes, archive }) {
           <p className="note-detail-body">{note.body}</p>
         </div>
       ) : (
-        <div className="note-detail-container">Note not found</div>
+        <div className="note-detail-container">Note tidak ditemukan</div>
       )}
     </>
   );

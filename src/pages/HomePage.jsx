@@ -13,6 +13,7 @@ export default function HomePage({
     <>
       <NotesList
         notes={filteredNotes}
+        title={title}
         onSetNotes={onSetNotes}
         onDeleteNote={onDeleteNote}
         onArchiveNote={onArchiveNote}

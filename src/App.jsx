@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import NoteDetailPage from "./pages/NoteDetailPage";
 import ArchivedNotesPage from "./pages/ArchivedNotesPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import {
   getActiveNotes,
   addNote,
@@ -87,6 +88,7 @@ function App() {
             />
           }
         />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );

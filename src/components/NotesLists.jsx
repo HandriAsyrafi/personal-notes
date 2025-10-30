@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function NotesList({
   children,
   notes,
+  title,
   archive,
   onSetNotes,
   onDeleteNote,
@@ -22,8 +23,10 @@ export default function NotesList({
     <>
       <div className="note-app__body">
         <div className="note-app__body__title">
-          <h2>{open ? "Buat catatan" : children}</h2>
-          {children === "Catatan aktif" ? (
+          <h2>
+            {title ? "Hasil pencarian" : open ? "Buat catatan" : children}
+          </h2>
+          {children === "Catatan aktif" && !title ? (
             <CgAddR
               size={25}
               className="icon"
