@@ -16,7 +16,6 @@ export default function NoteDetailPage({ notes, archive }) {
 
   return (
     <div className="note-detail-container">
-      <h1>Detail Note {id}</h1>
       <h2 className="note-detail-title">{note.title}</h2>
       <p className="note-detail-date">{showFormattedDate(note.createdAt)}</p>
       <p className="note-detail-body">{note.body}</p>

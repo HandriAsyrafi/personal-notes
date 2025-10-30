@@ -14,11 +14,11 @@ export default function NoteItem({
   return (
     <div className="note-item">
       <div className="note-item__content">
-        <p className="note-item__title">
-          <Link to={`/notes/${id}`}>{title}</Link>
-        </p>
-        <p className="note-item__date">{formatDate(createdAt)}</p>
-        <p className="note-item__body">{body}</p>
+        <Link to={`/notes/${id}`} className="title-link">
+          <p className="note-item__title">{title}</p>
+          <p className="note-item__date">{formatDate(createdAt)}</p>
+          <p className="note-item__body">{body}</p>
+        </Link>
       </div>
       <div className="note-item__action">
         <button
