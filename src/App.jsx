@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route, useParams } from "react-router-dom";
+import { Routes, Route, useParams, useSearchParams } from "react-router-dom";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import NoteDetailPage from "./pages/NoteDetailPage";
@@ -16,6 +16,11 @@ import {
 function App() {
   const [notes, setNotes] = useState(getActiveNotes());
   const [archive, setArchive] = useState(getArchivedNotes());
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const title = searchParams.get("title") || "";
+
+  const allNotes = [...notes, ...archive];
 
   function handleSubmitNote({ title, body }) {
     addNote({ title, body });
@@ -40,9 +45,18 @@ function App() {
     setArchive(getArchivedNotes());
   }
 
+  function getFilteredNotes(notes, keyword) {
+    if (!keyword || keyword.trim() === "") {
+      return notes;
+    }
+    return allNotes.filter((note) =>
+      note.title.toLowerCase().includes(keyword.toLowerCase())
+    );
+  }
+
   return (
     <>
-      <Header />
+      <Header setSearchParams={setSearchParams} />
       <Routes>
         <Route
           path="/"
@@ -50,10 +64,12 @@ function App() {
             <HomePage
               notes={notes}
               archive={archive}
+              title={title}
               onSetNotes={handleSubmitNote}
               onDeleteNote={handleDeleteNote}
               onArchiveNote={handleArchiveNote}
               onUnarchiveNote={handleUnarchiveNote}
+              onSearch={getFilteredNotes}
             />
           }
         />

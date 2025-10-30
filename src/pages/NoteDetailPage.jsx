@@ -8,17 +8,19 @@ export default function NoteDetailPage({ notes, archive }) {
     notes.find((note) => note.id === id) ||
     archive.find((note) => note.id === id);
 
-  console.log(note);
-
-  if (!note) {
-    return <div className="note-detail-container">Note not found</div>;
-  }
-
   return (
-    <div className="note-detail-container">
-      <h2 className="note-detail-title">{note.title}</h2>
-      <p className="note-detail-date">{showFormattedDate(note.createdAt)}</p>
-      <p className="note-detail-body">{note.body}</p>
-    </div>
+    <>
+      {note ? (
+        <div className="note-detail-container">
+          <h2 className="note-detail-title">{note.title}</h2>
+          <p className="note-detail-date">
+            {showFormattedDate(note.createdAt)}
+          </p>
+          <p className="note-detail-body">{note.body}</p>
+        </div>
+      ) : (
+        <div className="note-detail-container">Note not found</div>
+      )}
+    </>
   );
 }
