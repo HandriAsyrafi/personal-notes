@@ -1,9 +1,21 @@
 import NotesList from "../components/NotesLists";
 
-export default function HomePage() {
+export default function HomePage({
+  notes,
+  onSetNotes,
+  onDeleteNote,
+  onArchiveNote,
+}) {
   return (
     <>
-      <NotesList />
+      <NotesList
+        notes={notes}
+        onSetNotes={onSetNotes}
+        onDeleteNote={onDeleteNote}
+        onArchiveNote={onArchiveNote}
+      >
+        Catatan aktif
+      </NotesList>
     </>
   );
 }

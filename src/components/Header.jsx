@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { FaBoxArchive } from "react-icons/fa6";
 
 export default function Header() {
+  const [searchParam, setSearchParam] = useSearchParams();
   return (
     <div className="note-app__header">
       <h1>
@@ -9,7 +11,7 @@ export default function Header() {
         </Link>
       </h1>
       <Link to={"/archived"} className="nav-link">
-        Archive
+        <FaBoxArchive size={20} className="icon" />
       </Link>
       <input type="text" name="search" placeholder="Cari catatan ..." />
     </div>

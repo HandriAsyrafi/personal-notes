@@ -1,33 +1,52 @@
 import NoteItem from "./NoteItem";
-import { getActiveNotes } from "../utils/local-data";
+import NoteInput from "../components/NoteInput";
 import { showFormattedDate } from "../utils";
 import { CgAddR } from "react-icons/cg";
-import { Link } from "react-router-dom";
+import { getArchivedNotes } from "../utils/local-data";
+import { useState } from "react";
 
-export default function NotesList() {
-  const notes = getActiveNotes();
+export default function NotesList({
+  children,
+  notes,
+  archive,
+  onSetNotes,
+  onDeleteNote,
+  onArchiveNote,
+  onUnarchiveNote,
+}) {
+  const [open, setIsOpen] = useState(false);
 
-  // const filteredNotes =
-  //   children === "Catatan aktif"
-  //     ? notes.filter((note) => note.archived === false)
-  //     : notes.filter((note) => note.archived === true);
+  const filteredNotes = children === "Catatan aktif" ? notes : archive;
 
   return (
     <>
       <div className="note-app__body">
         <div className="note-app__body__title">
-          <h2>Catatan aktif</h2>
-          <Link to={"/add"}>
-            <CgAddR size={25} className="add-icon" />
-          </Link>
+          <h2>{open ? "Buat catatan" : children}</h2>
+          {children === "Catatan aktif" ? (
+            <CgAddR
+              size={25}
+              className="icon"
+              onClick={() => setIsOpen(!open)}
+            />
+          ) : null}
         </div>
-        {notes.length > 0 ? (
+        {open ? (
+          <NoteInput
+            notes={notes}
+            onSetNotes={onSetNotes}
+            setIsOpen={setIsOpen}
+          />
+        ) : filteredNotes.length > 0 ? (
           <div className="notes-list">
-            {notes.map((note) => (
+            {filteredNotes.map((note) => (
               <NoteItem
                 {...note}
                 key={note.id}
                 formatDate={showFormattedDate}
+                onDeleteNote={onDeleteNote}
+                onArchiveNote={onArchiveNote}
+                onUnarchiveNote={onUnarchiveNote}
               />
             ))}
           </div>
